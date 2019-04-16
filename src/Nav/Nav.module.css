@@ -1,0 +1,10 @@
+.navLink {
+  color: white;
+  font-size: 15px;
+  margin: 0px 50px
+}
+
+.navLink:hover {
+  color: #77abff;
+  text-decoration: none;
+}
