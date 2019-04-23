@@ -17,7 +17,7 @@ class CreateContainer extends Component {
   addReport = async (reportComp, e) => {
     e.preventDefault();
     try{
-        const response = await fetch('http://localhost:9000/api/v1/reports', {
+        const response = await fetch('http://localhost:9000/api/v1/users/myreports', {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify(reportComp),
@@ -31,6 +31,8 @@ class CreateContainer extends Component {
         }
 
         const parsedCreateReport = await response.json();
+
+        localStorage.setItem('reportId', parsedCreateReport.reportId)
 
         this.props.history.push('/report');
 

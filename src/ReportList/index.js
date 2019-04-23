@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Reports = (props) => {
   console.log(props)
+  console.log('hohohohohoho', localStorage.getItem('userId'));
+  console.log('huhuhuhuhuhuh', localStorage.getItem('username'));
 
   const reports = props.reports.map(report => {
     return <tr key={report._id}>
@@ -10,8 +12,12 @@ const Reports = (props) => {
         <td><Link to={`/${report._id}`}>{report.flightNum}</Link></td>
         <td>{report.airline}</td>
         <td>{report.status}</td>
+        { localStorage.getItem('userId') ?
         <td><Link className="btn btn-primary" to={`/${report._id}/edit`}>Edit</Link></td>
+        : null}
+        { localStorage.getItem('userId') ?
         <td><button className="close mr-5" type="button" aria-label="Close" onClick={props.deleteReport.bind(null, report._id)}><span className="pr-5" aria-hidden="true">&times;</span></button></td>
+        : null}
       </tr>
   });
 

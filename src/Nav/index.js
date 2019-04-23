@@ -13,7 +13,10 @@ const Nav = () => {
             <Link to="/report" className={style.navLink}>Report List</Link>
         </li>
         <li className="nav-item my-2">
-            <Link to="/report/new" className={style.navLink}>Create Report</Link>
+            <Link to="/login" className={style.navLink}>Create Report</Link>
+        </li>
+        <li className="nav-item my-2">
+            <Link to="/myaccount" className={style.navLink}>My Reports</Link>
         </li>
       </ul>
     </div>

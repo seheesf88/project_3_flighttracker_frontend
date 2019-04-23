@@ -62,8 +62,8 @@ class CreateReport extends Component {
                   </select>
               </div>
               <div className="form-group">
-                <label className="mb-0" htmlFor="issue">Issue:</label>
-                  <textarea name="issue" id="issue" className="form-group py-4 px-4" rows="8" cols="10" onChange={this.handleInput} placeholder="ex)Flight is looking for a gate to park">
+                <label className="" htmlFor="issue">Issue:</label>
+                  <textarea name="issue" id="issue" className="form-control py-4 px-4" rows="8" cols="10" onChange={this.handleInput} placeholder="ex)Flight is looking for a gate to park">
                   </textarea>
               </div>
               <div className="text-center form-group">

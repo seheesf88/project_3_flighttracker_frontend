@@ -18,7 +18,7 @@ class FlightContainer extends Component {
 
   componentDidMount(){
     const flightNumber = localStorage.getItem('flightNumber').split(' ').join('').toUpperCase()
-    console.log('!!!!!!!!!!!!!', flightNumber);
+    // console.log('!!!!!!!!!!!!!', flightNumber);
     this.getFlights(flightNumber);
     this.getFlightReports(flightNumber)//need to get confirm from cesar
   };
@@ -33,21 +33,21 @@ class FlightContainer extends Component {
         console.log("here?");
         throw Error(response.statusText)
       }
-      console.log("~~~~~~~~~~~~~~~~", response);
+      // console.log("~~~~~~~~~~~~~~~~", response);
       const flightsParsed = await response.json();
       // const flightDeparture = flightsParsed[0].departure.iataCode;
       console.log("????", flightsParsed);
-      if(flightsParsed.error === "No Record Found or Flight not currently detected by receivers. "){
-        console.log("how abouttttt", flightsParsed.error === "No Record Found or Flight not currently detected by receivers. ");
-        alert('')
-      }else{
+      // if(flightsParsed.error === "No Record Found or Flight not currently detected by receivers. "){
+      //   console.log("how abouttttt", flightsParsed.error === "No Record Found or Flight not currently detected by receivers. ");
+      //
+      // }else{
 
         this.setState({
           flightNumber : flightsParsed[0].flight.iataNumber,
           flightDeparture: flightsParsed[0].departure.iataCode,
           flightArrival: flightsParsed[0].arrival.iataCode,
         })
-      }
+      // }
     }catch(err){
       return err
     }
@@ -81,15 +81,21 @@ class FlightContainer extends Component {
 //=============================================================================
 
   render(){
+
     return(
     <div>
         <Header />
         <Nav />
-
-       <FlightList flightNumber={this.state.flightNumber}
-                   flightDeparture={this.state.flightDeparture}
-                   flightArrival={this.state.flightArrival}/>
-
+      { this.state.flightDeparture
+       ? <FlightList flightNumber={this.state.flightNumber}
+                     flightDeparture={this.state.flightDeparture}
+                     flightArrival={this.state.flightArrival}/>
+       : <div className="text-center my-5">
+          <h3>"No Record Found or Flight not currently detected by receivers."</h3>
+          <h5 className="mt-5">Please go back to home or try with advanced search.</h5>
+          <h5>Thank you.</h5>
+          </div>
+      }
       { this.state.flightDeparture
         ? <AirportTable flightDeparture={this.state.flightDeparture} flightNumber={this.state.flightNumber} />
         : null
