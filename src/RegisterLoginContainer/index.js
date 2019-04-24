@@ -11,7 +11,8 @@ class RegisterLoginContainer extends Component{
     super();
     this.state = {
       login : {
-        email: '',
+        username: '',
+        email:'',
         password: '',
         successful: false
       },
@@ -70,12 +71,18 @@ class RegisterLoginContainer extends Component{
      if(!response.ok){
        throw Error(response.statusText)
      }
-     const parsedResponse = await response.json();
 
+    console.log('reg response', response);
+    const parsedResponse = await response.json();
+    console.log('reg parsedResponse', parsedResponse);
+
+     // console.log('userId', parsedResponse.userId);
+     // console.log('username', parsedResponse.username);
+     // console.log('parsed??', parsedResponse);
      localStorage.setItem('userId', parsedResponse.userId)
      localStorage.setItem('username', parsedResponse.username)
 
-     this.props.history.push('/report/new')//###########################
+     this.props.history.push('/report/new')
    }catch(err){
      console.log('fetch regi func fail');
    }
@@ -118,18 +125,20 @@ class RegisterLoginContainer extends Component{
        throw Error(response.statusText);
      }
 
-
+     console.log('login response?', response);
      const parsedResponse = await response.json();
-
+     console.log("login parsedResponse", parsedResponse.status)
      if(parsedResponse.status !== 401){
+     // if(parsedResponse.status === 200){
        updatedLogin.successful = true;
        this.setState({
          login: updatedLogin
        })
 
+       console.log("username", parsedResponse);
        localStorage.setItem('userId', parsedResponse.userId)
        localStorage.setItem('username', parsedResponse.username)
-       this.props.history.push('/report/new')//###################################
+       // this.props.history.push('/report/new')//###################################
      }else{
        alert('login fail1')
      }
@@ -137,6 +146,9 @@ class RegisterLoginContainer extends Component{
      alert("login fail2")
    }
  }
+
+
+
   render(){
     return(
       <div>
@@ -147,6 +159,7 @@ class RegisterLoginContainer extends Component{
 
           <h2>Login</h2>
             <form onSubmit={this.handleLoginSubmit}>
+              username: <input name="username" onChange={this.handleLoginChange} />
               email: <input name="email" onChange={this.handleLoginChange} />
               password: <input name="password" onChange={this.handleLoginChange}/>
               <button type="sumbit">Login</button>
