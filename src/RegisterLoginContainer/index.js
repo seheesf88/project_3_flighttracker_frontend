@@ -12,7 +12,7 @@ class RegisterLoginContainer extends Component{
     this.state = {
       login : {
         username: '',
-        email:'',
+        // email:'',
         password: '',
         successful: false
       },
@@ -58,6 +58,8 @@ class RegisterLoginContainer extends Component{
   }
 
  fetchRegister = async(updatedRegister) => {
+   console.log('reg updatedRegister', updatedRegister);
+   console.log('reg stringify', JSON.stringify(updatedRegister) );
    try{
      const response = await fetch('http://localhost:9000/api/v1/auth', {
        method: 'POST',
@@ -94,10 +96,12 @@ class RegisterLoginContainer extends Component{
    const updatedChange = {
      ...this.state.login
    }
-   updatedChange[e.target.name] = [e.target.value];
+   // console.log('updatedChange', updatedChange);
+   updatedChange[e.target.name] = e.target.value;
    this.setState({
      login: updatedChange
    })
+   // console.log('this.state.login', this.state.login);
  }
 
 
@@ -107,10 +111,12 @@ class RegisterLoginContainer extends Component{
      ...this.state.login
    }
    this.fetchLogin(updatedLogin)
+   // console.log(updatedLogin);
  }
 
  fetchLogin = async(updatedLogin) => {
-
+   console.log('fetchloging', updatedLogin);
+   console.log('??', JSON.stringify(updatedLogin));
    try{
      const response = await fetch('http://localhost:9000/api/v1/auth/login', {
        method: 'POST',
@@ -127,7 +133,7 @@ class RegisterLoginContainer extends Component{
 
      console.log('login response?', response);
      const parsedResponse = await response.json();
-     console.log("login parsedResponse", parsedResponse.status)
+     console.log("login parsedResponse?", parsedResponse)
      if(parsedResponse.status !== 401){
      // if(parsedResponse.status === 200){
        updatedLogin.successful = true;
@@ -135,10 +141,10 @@ class RegisterLoginContainer extends Component{
          login: updatedLogin
        })
 
-       console.log("username", parsedResponse);
+
        localStorage.setItem('userId', parsedResponse.userId)
        localStorage.setItem('username', parsedResponse.username)
-       // this.props.history.push('/report/new')//###################################
+       this.props.history.push('/report/new')//###################################
      }else{
        alert('login fail1')
      }
@@ -155,23 +161,27 @@ class RegisterLoginContainer extends Component{
         <Header />
         <Nav />
 
-
-
-          <h2>Login</h2>
-            <form onSubmit={this.handleLoginSubmit}>
-              username: <input name="username" onChange={this.handleLoginChange} />
-              email: <input name="email" onChange={this.handleLoginChange} />
-              password: <input name="password" onChange={this.handleLoginChange}/>
-              <button type="sumbit">Login</button>
-            </form>
-          <h2>Register</h2>
-            <form onSubmit={this.handleRegisterSubmit}>
-              username: <input name="username" value={this.state.register.username} onChange={this.handleRegisterChange}/>
-              email: <input name="email" value={this.state.register.email} onChange={this.handleRegisterChange}/>
-              password: <input name="password" value={this.state.register.password} onChange={this.handleRegisterChange}/>
-              <button type="submit">Register</button>
-            </form>
-
+        <div className="container">
+          <div className="row">
+            <div className="col-4 offset-1 form-group">
+              <h2 className="mb-3">Login</h2>
+                <form onSubmit={this.handleLoginSubmit}>
+                  <div className="mt-4">Username:<input className="form-control" name="username" value={this.state.login.username} onChange={this.handleLoginChange} /></div>
+                  <div className="mt-3">Password: <input className="form-control" name="password" value={this.state.login.password} onChange={this.handleLoginChange}/></div>
+                  <div className="text-right mt-3"><button className="btn btn-primary" type="submit">Login</button></div>
+                </form>
+            </div>
+            <div className="col-4 offset-1 form-group">
+              <h2>Register</h2>
+                <form onSubmit={this.handleRegisterSubmit}>
+                  <div className="mt-3">Username: <input className="form-control" name="username" value={this.state.register.username} onChange={this.handleRegisterChange}/></div>
+                  <div className="mt-3">Email: <input className="form-control" name="email" value={this.state.register.email} onChange={this.handleRegisterChange}/></div>
+                  <div className="mt-3">Password: <input className="form-control" name="password" value={this.state.register.password} onChange={this.handleRegisterChange}/></div>
+                  <div className="text-right mt-3"><button className="btn btn-primary" type="submit">Register</button></div>
+                </form>
+              </div>
+            </div>
+          </div>
         <Footer />
 
       </div>
