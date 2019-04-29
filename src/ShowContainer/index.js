@@ -8,7 +8,8 @@ class ShowContainer extends Component {
   constructor(){
     super()
     this.state = {
-      report: {}
+      report: {},
+      authorId: ''
     }
   }
 
@@ -30,7 +31,8 @@ class ShowContainer extends Component {
       const reportsParsed = await response.json();
       console.log(reportsParsed.data)
       this.setState({
-          report: reportsParsed.data
+          report: reportsParsed.data,
+          authorId: localStorage.getItem('authorId')
       })
 
     }catch(err){

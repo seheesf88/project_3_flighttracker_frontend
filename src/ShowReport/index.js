@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ShowReport = (props) => {
+  console.log(props);
   return(
     <div className="container">
       <div className="text-center mt-4 pb-5">
@@ -17,6 +18,7 @@ const ShowReport = (props) => {
               <p className="infoList">Estimated Arrival Time:</p>
               <p className="infoList">Status :</p>
               <p className="infoList">Issue :</p>
+              <p className="infoList">Report by :</p>
             </div>
             <div className="col-4 offset-1 mt-3">
               <p className="infoData">{props.report.flightNum}</p>
@@ -26,6 +28,7 @@ const ShowReport = (props) => {
               <p className="infoData">{props.report.estArrival}</p>
               <p className="infoData">{props.report.status}</p>
               <p className="infoData">{props.report.issue ? props.report.issue : `There is no comment`}</p>
+              <p className="infoData">{props.report.authorname}</p>
             </div>
           </div>
         </div>

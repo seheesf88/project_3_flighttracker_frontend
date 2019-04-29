@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from './Nav.module.css'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 
 
@@ -24,7 +24,7 @@ class Nav extends Component{
       if(responseParsed.status === 200){
         localStorage.removeItem('userId')
         localStorage.removeItem('username')
-        // this.props.history.push('/')
+        this.props.history.push('/')
       }
 
     }catch(err){
@@ -43,10 +43,20 @@ render(){
             <Link to="/report" className={style.navLink}>Report List</Link>
         </li>
         <li className="nav-item my-2">
+            { localStorage.getItem('userId') !== null
+            ?
+            <Link to="/report/new" className={style.navLink}>Create Report</Link>
+            :
             <Link to="/login" className={style.navLink}>Create Report</Link>
+            }
         </li>
         <li className="nav-item my-2">
+           { localStorage.getItem('userId') !== null
+           ?
             <Link to="/myaccount" className={style.navLink}>My Reports</Link>
+            :
+            <Link to="/login" className={style.navLink}>My Reports</Link>
+           }
         </li>
         <li className="nav-item my-2">
             <button onClick={this.logout}>Logout</button>
@@ -56,4 +66,4 @@ render(){
   )
 }
 }
-export default Nav;
+export default withRouter(Nav)
