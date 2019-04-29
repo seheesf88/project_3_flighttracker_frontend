@@ -58,8 +58,8 @@ render(){
             <Link to="/login" className={style.navLink}>My Reports</Link>
            }
         </li>
-        <li className="nav-item my-2">
-            <button onClick={this.logout}>Logout</button>
+        <li className="nav-item mt-2 mb-2 ml-5">
+            <button className="btn btn-secondary btn-sm" onClick={this.logout}>Logout</button>
         </li>
       </ul>
     </div>

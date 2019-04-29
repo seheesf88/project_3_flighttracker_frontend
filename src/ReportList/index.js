@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Reports = (props) => {
   console.log(props)
-  console.log('hohohohohoho', localStorage.getItem('userId'));
-  console.log('huhuhuhuhuhuh', localStorage.getItem('username'));
+  // console.log('hohohohohoho', localStorage.getItem('userId'));
+  // console.log('huhuhuhuhuhuh', localStorage.getItem('username'));
 
   const reports = props.reports.reverse().map(report => {
 

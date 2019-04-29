@@ -1,10 +1,15 @@
 .navLink {
   color: white;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0px 50px
 }
 
 .navLink:hover {
+  color: #77abff;
+  text-decoration: none;
+}
+
+.logout {
   color: #77abff;
   text-decoration: none;
 }

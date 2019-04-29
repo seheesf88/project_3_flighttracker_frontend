@@ -94,21 +94,29 @@ class MyReportContainer extends Component{
 
 
   render(){
+    console.log('lololl', localStorage.getItem('userId'));
 
     return(
       <div>
         <Header />
         <Nav />
-        <div>
-          <h2 className="text-center mb-5">Profile</h2>
-            <div className="offset-2">
-              <span className="offset-1">Username : <span className="ml-2">{this.state.userinfo.username}</span></span>
-              <span className="offset-1">Email : <span className="ml-2">{this.state.userinfo.email}</span></span>
-              <span className="offset-1"><Link to="/">Edit</Link></span>
+        <div className="container">
+          <div className="row">
+            <div className="col-3">
+              <div className="mb-5"><span className="h2">Profile</span><span className="ml-3"><Link to={`/myaccount/${localStorage.getItem('userId')}/edit`}>Edit</Link></span></div>
+                <div className="">
+                  <div className="">Username : <span className="ml-2">{this.state.userinfo.username}</span></div>
+                  <div className="">Email : <span className="ml-2">{this.state.userinfo.email}</span></div>
+                </div>
             </div>
-          <h2 className="text-center my-5">My Report List</h2>
-          <MyReportComponenet myReports={this.state.reports} deleteReport={this.deleteReport}/>
+            <div className="col-8">
+              <h2 className="text-center mb-5">My Report List</h2>
+              <MyReportComponenet myReports={this.state.reports} deleteReport={this.deleteReport}/>
+            </div>
+          </div>
         </div>
+
+        <div id="map"></div>
         <Footer />
       </div>
     )

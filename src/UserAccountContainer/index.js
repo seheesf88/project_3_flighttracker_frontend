@@ -7,22 +7,48 @@ import Nav from '../Nav';
 import Footer from '../Footer';
 
 
-
-
 class UserAccountContainer extends Component{
   constructor(){
     super();
     this.state = {
-      login : {
-        email: '',
-        password: '',
-        successful: false
-      },
-      register: {
-        username:'',
-        email: '',
-        password:'',
+      userInfo: {},
+    }
+  }
+
+  componentDidMount(){
+    // this.editMyinfo()
+  };
+
+  handleEditFormInput = (e) => {
+    this.setState({
+      userInfo: {
+        ...this.state.userInfo,
+        [e.target.name]: e.target.value
       }
+    })
+  }
+
+  editMyinfo = async(e) => {
+    e.preventDefault();
+    const userId = localStorage.getItem('userId')
+    console.log('????', userId);
+
+    try{
+      const response = await fetch(`http://localhost:9000/api/v1/users/${userId}`, {
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify(this.state.userInfo),
+        headers: {
+          'Content-Type' : 'application/json'
+        }
+      });
+
+      if(!response.ok){
+        throw Error(response.statusText)
+      }
+
+    }catch(err){
+      return err
     }
   }
 
@@ -30,20 +56,18 @@ class UserAccountContainer extends Component{
   render(){
     return(
       <div>
-        <div>
-          <Header />
+        <Header />
+        <Nav />
+        <div className="form-group col-4 offset-4">
+          <h2 className="text-center mb-5">Edit Profile</h2>
+          <form onSubmit={this.editMyinfo}>
+            <div>Username: <input className="form-control mb-3" name="username" value={this.state.userInfo.username} onChange={this.handleEditFormInput}/></div>
+            <div>Email:  <input className="form-control mb-3" name="email" value={this.state.userInfo.email} onChange={this.handleEditFormInput}/></div>
+            <div>password: <input className="form-control mb-3" name="password" value={this.state.userInfo.password} onChange={this.handleEditFormInput}/></div>
+            <div className="text-right mt-2"><button className="form-control btn btn-primary col-2" type="submit">Edit</button></div>
+          </form>
         </div>
-
-        <div>
-          <Nav />
-        </div>
-
-          <h2>Profile</h2>
-
-          
-        <div>
-            <Footer />
-        </div>
+        <Footer />
       </div>
     )
   }
