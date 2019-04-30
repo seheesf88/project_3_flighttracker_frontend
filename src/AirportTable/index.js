@@ -9,7 +9,10 @@ class AirportTable extends Component{
     this.state = {
       departure: "",
       flightNumber: "",
-      arrival: {}
+      status: "",
+      airline: "",
+      departure: {},
+      arrival: {},
     }
   }
   componentDidMount(){
@@ -27,35 +30,47 @@ class AirportTable extends Component{
         }
 
         const timeTableParsed = await response.json();
-        console.log('timeTableParsed', timeTableParsed);
+        // console.log('timeTableParsed', timeTableParsed);
 
         //Mapping the Time Table to get Flights Information
         const currentFlightsOnTimeTable = timeTableParsed.map((table) => {
           if(table.flight.iataNumber === this.props.flightNumber){
+            console.log('????', table)
             this.setState({
-              departure: this.props.flightDeparture,
-              flightNumber: this.props.flightNumber,
-              arrival : {status: table.status,
-                        airline: table.airline.name,
+              departure: this.props.flightDeparture,//departure airport
+              flightNumber: this.props.flightNumber,//flight number
+              status: table.status,
+              airline: table.airline.name,
+              departure: {
+                        airport: table.departure.iataCode,
+                        terminal: table.departure.terminal,
+                        gate: table.departure.gate,
+                        scheduledTime: moment(table.departure.scheduledTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                        estimatedTime: moment(table.departure.estimatedTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                        },
+              arrival : {
                         airport: table.arrival.iataCode,
                         terminal: table.arrival.terminal,
                         gate: table.arrival.gate,
+                        baggage: table.arrival.baggage,
                         scheduledTime: moment(table.arrival.scheduledTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                         estimatedTime: moment(table.arrival.estimatedTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}
-            })
-            console.log('formated STATE', this.state);
+                        }
+          )
+            // console.log('formated STATE', this.state);
 
           }else{
-            // console.log('didnt found it');
+            console.log('didnt found it');
           }
         })
       }catch(err){
+        console.log('fail to fetch?');
         return err
       }
     }
 
   render(){
-    console.log(this.state.arrival.scheduledTime)
+    console.log('==============>>>>>>>',this.state.arrival)
     return(
       <div className="container mb-3">
         <div className="text-center">
@@ -68,26 +83,34 @@ class AirportTable extends Component{
               <div className="col-4 my-3">
                 <p>Airline:</p>
                 <p>Flight status:</p>
-                <p>Terminal:</p>
-                <p>Gate:</p>
-                <p>Scheduled Time:</p>
-                <p>Estimated Time:</p>
+                <p>Departure Terminal:</p>
+                <p>Departure Gate:</p>
+                <p>Departure Time:</p>
+                <p>Arrival Time:</p>
+                <p>Arrival Terminal:</p>
+                <p>Arrival Gate:</p>
+                <p>Baggage</p>
               </div>
               <div className="col-6 my-3">
-                <p>{this.state.arrival.airline ? this.state.arrival.airline : `Can't find Airline info`}</p>
-                <p>{this.state.arrival.status ? this.state.arrival.status : `Can't find status info`}</p>
+                <p>{this.state.airline ? this.state.airline : `Can't find Airline info`}</p>
+                <p>{this.state.status ? this.state.status : `Can't find status info`}</p>
+                <p>{this.state.departure.terminal ? this.state.departure.terminal : `Can't find terminal info`}</p>
+                <p>{this.state.departure.gate ? this.state.departure.gate : `Can't find terminal info`}</p>
+                <p>{this.state.departure.scheduledTime ? this.state.departure.scheduledTime : `Can't find scheduled time`}</p>
+                <p>{this.state.arrival.scheduledTime ? this.state.arrival.scheduledTime : `Can't find scheduled time`}</p>
                 <p>{this.state.arrival.terminal ? this.state.arrival.terminal : `Can't find terminal info`}</p>
                 <p>{this.state.arrival.gate ? this.state.arrival.gate : `Can't find gate info`}</p>
-                <p>{this.state.arrival.scheduledTime ? this.state.arrival.scheduledTime : `Can't find scheduled time`}</p>
-                <p>{this.state.arrival.estimatedTime ? this.state.arrival.estimatedTime: `Can't find estimated time`}</p>
+                <p>{this.state.arrival.baggage ? this.state.arrival.baggage : `Can't find gate info`}</p>
               </div>
             </div>
           </div>
         </div>
-          <FlightProgress scheduledTime={this.state.arrival.scheduledTime} estimatedTime={this.state.arrival.estimatedTime} />
       </div>
     )
   }
 }
 
 export default AirportTable
+
+
+// <FlightProgress scheduledTime={this.state.arrival.scheduledTime} estimatedTime={this.state.arrival.estimatedTime} />

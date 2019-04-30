@@ -46,6 +46,7 @@ class FlightContainer extends Component {
           flightNumber : flightsParsed[0].flight.iataNumber,
           flightDeparture: flightsParsed[0].departure.iataCode,
           flightArrival: flightsParsed[0].arrival.iataCode,
+          status: flightsParsed[0].status
         })
       // }
     }catch(err){
@@ -89,7 +90,9 @@ class FlightContainer extends Component {
       { this.state.flightDeparture
        ? <FlightList flightNumber={this.state.flightNumber}
                      flightDeparture={this.state.flightDeparture}
-                     flightArrival={this.state.flightArrival}/>
+                     flightArrival={this.state.flightArrival}
+                     flightStatus={this.state.status}
+                     />
        : <div className="text-center my-5">
           <h3>"No Record Found or Flight not currently detected by receivers."</h3>
           <h5 className="mt-5">Please go back to home or try with advanced search.</h5>
