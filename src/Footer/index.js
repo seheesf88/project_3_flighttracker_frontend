@@ -8,7 +8,7 @@ const Footer = () => {
       <div className={style.footerBg}>
         <div className="container">
           <div className="row">
-            <div className="col-2 offset-5 mt-4 text-light">
+            <div className="col-sm-2 offset-5 mt-4 text-light">
               &copy; 2019
             </div>
           </div>

@@ -1,3 +1,15 @@
+#navLink {
+  color: white;
+  font-size: 18px;
+  margin: 0px 50px;
+  border: none;
+}
+
+#navLink:hover {
+  color: #77abff;
+  text-decoration: none;
+}
+
 .navLink {
   color: white;
   font-size: 18px;
@@ -9,7 +21,9 @@
   text-decoration: none;
 }
 
-.logout {
-  color: #77abff;
-  text-decoration: none;
+
+@media only screen and (max-width: 600px){
+  nav {
+    text-align: right;
+  }
 }

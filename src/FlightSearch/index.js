@@ -44,10 +44,10 @@ class FlightSearch extends Component{
     // console.log('PROPS = ', this.props)
     const { open } = this.state;
     return(
-    <div>
-      <div className="container">
+    <div className="flightSearch-sm">
+      <div className="container-sm">
         <div className="row">
-          <div className="col-8 offset-2">
+          <div className="col-sm-8 offset-sm-2">
             <div className="form-group">
               <form onSubmit={this.handleSubmit}>
                 <div className="text-left">
@@ -66,6 +66,7 @@ class FlightSearch extends Component{
                   Advanced search
                   </Button>
                   <Collapse in={this.state.open}>
+
                     <form className="mt-5" onSubmit={this.handleAdvancedSubmit}>
                       <div className="form-group text-left">
                         <label htmlFor="departure">Departure Airport</label>
@@ -81,6 +82,7 @@ class FlightSearch extends Component{
                       </div>
                       <button className="btn btn-primary">Search Flight</button>
                     </form>
+
                   </Collapse>
                 </div>
               </form>
