@@ -21,7 +21,7 @@ class EditContainer extends Component {
   getReport = async() => {
     const reportId = window.location.pathname.split('/')[1];
     try{
-      const response = await fetch(`http://localhost:9000/api/v1/reports/${reportId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/v1/reports/${reportId}`, {
         credentials: 'include',
       });
 
@@ -56,7 +56,7 @@ class EditContainer extends Component {
     const reportId = window.location.pathname.split('/')[1];
     console.log('SENDING TO DB = ', this.state.report);
     try{
-        const response = await fetch(`http://localhost:9000/api/v1/reports/${reportId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/v1/reports/${reportId}`, {
           method: 'PUT',
           credentials: 'include',
           body: JSON.stringify(this.state.report),

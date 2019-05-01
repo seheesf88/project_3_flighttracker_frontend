@@ -34,7 +34,7 @@ class UserAccountContainer extends Component{
     console.log('????', userId);
 
     try{
-      const response = await fetch(`http://localhost:9000/api/v1/users/${userId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/${userId}`, {
         method: 'PUT',
         credentials: 'include',
         body: JSON.stringify(this.state.userInfo),

@@ -20,7 +20,7 @@ class ShowContainer extends Component {
   getOneReports = async() => {
     const reportId = window.location.pathname.split('/')[1];
     try{
-      const response = await fetch(`http://localhost:9000/api/v1/reports/${reportId}`,  {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/v1/reports/${reportId}`,  {
         credentials: 'include'
       })
 

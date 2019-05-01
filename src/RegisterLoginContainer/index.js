@@ -61,7 +61,7 @@ class RegisterLoginContainer extends Component{
    console.log('reg updatedRegister', updatedRegister);
    console.log('reg stringify', JSON.stringify(updatedRegister) );
    try{
-     const response = await fetch('http://localhost:9000/api/v1/auth', {
+     const response = await fetch(`${process.env.REACT_APP_API}/api/v1/auth`, {
        method: 'POST',
        credentials: 'include',
        body: JSON.stringify(updatedRegister),
@@ -118,7 +118,7 @@ class RegisterLoginContainer extends Component{
    console.log('fetchloging', updatedLogin);
    console.log('??', JSON.stringify(updatedLogin));
    try{
-     const response = await fetch('http://localhost:9000/api/v1/auth/login', {
+     const response = await fetch(`${process.env.REACT_APP_API}/api/v1/auth/login`, {
        method: 'POST',
        credentials: 'include',
        body: JSON.stringify(updatedLogin),

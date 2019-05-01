@@ -16,7 +16,7 @@ class SearchReports extends Component{
   getFlightReports = async(flightNumber) => {
 
     try{
-        const response = await fetch ('http://localhost:9000/api/v1/reports/', {
+        const response = await fetch (`${process.env.REACT_APP_API}/api/v1/reports/`, {
           credentials: 'include',
         });
 

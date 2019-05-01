@@ -55,7 +55,7 @@ class CreateContainer extends Component {
     console.log('up', updatedReport);
     console.log('report json', JSON.stringify(updatedReport));
     try{
-        const response = await fetch('http://localhost:9000/api/v1/reports', {
+        const response = await fetch(`${process.env.REACT_APP_API}/api/v1/reports`, {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify(updatedReport),
