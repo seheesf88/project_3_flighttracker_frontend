@@ -73,13 +73,10 @@ class MyReportContainer extends Component{
   deleteReport = async(id, e) => {
     e.preventDefault();
     try {
-      const deleteReport = await fetch(`${process.env.REACT_APP_API}/api/v1/reports/` + id, {
+      await fetch(`${process.env.REACT_APP_API}/api/v1/reports/` + id, {
         method: 'DELETE',
         credentials: 'include'
       })
-
-
-      const parsedResponse = await deleteReport.json();
 
       this.setState({
         reports: this.state.reports.filter((report) => report._id !== id)

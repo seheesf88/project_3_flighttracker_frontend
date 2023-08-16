@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import FlightProgress from '../FlightProgress'
 var moment = require('moment');
 
 
@@ -11,8 +10,7 @@ class AirportTable extends Component{
       flightNumber: "",
       status: "",
       airline: "",
-      departure: {},
-      arrival: {},
+      arrival: {}
     }
   }
   componentDidMount(){

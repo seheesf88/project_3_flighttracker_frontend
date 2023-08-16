@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
 import Header from '../Header';
 import Nav from '../Nav';
-import CreateReport from '../CreateReport';
 import Reports from '../ReportList';
 import Footer from '../Footer';
 

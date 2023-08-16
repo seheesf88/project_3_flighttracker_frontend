@@ -5,10 +5,6 @@ import { Link, withRouter } from 'react-router-dom';
 
 
 class Nav extends Component{
-  constructor(){
-    super()
-  }
-
   logout = async() => {
     const userId = localStorage.getItem('userId')
     try{

@@ -26,11 +26,6 @@ class SearchReports extends Component{
 
         const reportsParsed = await response.json();
 
-        // console.log( 'reportsParsed.data.flightNumber ==>', reportsParsed.data[0].flightNum);
-        //console.log('flightNumber variable ==>', flightNumber);
-
-        //console.log( 'reportsParsed ==>', reportsParsed);
-
         const flightReports = reportsParsed.data.map((reports) => {
           if(reports.flightNum === flightNumber){
             this.setState({

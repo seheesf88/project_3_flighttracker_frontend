@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import HomeContainer from './HomeContainer';
@@ -40,7 +39,3 @@ const App = () => {
 }
 
 export default App;
-
-
-//delete createReport component
-//delete FlightProgress comp

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { Collapse, Button} from 'react-bootstrap';
-import FlightContainer from '../FlightContainer'
-
 
 class FlightSearch extends Component{
   constructor(){

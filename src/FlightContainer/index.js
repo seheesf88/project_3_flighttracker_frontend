@@ -5,8 +5,6 @@ import Footer from '../Footer';
 import FlightList from '../FlightList';
 import AirportTable from '../AirportTable';
 import SearchReports from '../SearchReports';
-import FlightProgress from '../FlightProgress'
-
 
 class FlightContainer extends Component {
   constructor (){

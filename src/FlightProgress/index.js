@@ -1,5 +1,4 @@
 import React from 'react';
-import { ProgressBar } from 'react-bootstrap/ProgressBar';
 import Clock from 'react-live-clock'
 
 const FlightProgress = (props) => {
